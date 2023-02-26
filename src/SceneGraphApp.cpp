@@ -109,6 +109,13 @@ void SceneGraphApp::onRenderGraphicsContext(const VRGraphicsState &renderState) 
         ground.reset(new GroundPlane(vec3(0, -1, 0), vec3(0, 1, 0)));
         
         //TODO: Construct the scenegraph to draw the robot
+        sceneGraphRoot.reset(new SceneNode());
+        
+        shared_ptr<basicgraphics::Box> bodyBox (new Box(vec3(0,0,0),vec3(20,20,20),vec4(1,0,0,0)));
+        
+        shared_ptr<SceneNode> bodyNode (new SceneNode(bodyBox));
+        sceneGraphRoot->addChild(bodyNode);
+        
         
     }
 }
@@ -208,4 +215,5 @@ void SceneGraphApp::initializeText() {
 	_textShader.compileShader("textRendering.vert", GLSLShader::VERTEX);
 	_textShader.compileShader("textRendering.frag", GLSLShader::FRAGMENT);
 	_textShader.link();
+}
 }
